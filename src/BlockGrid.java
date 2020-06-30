@@ -76,6 +76,7 @@ public class BlockGrid
 		}
 	}
 
+        @Override
 	public String toString()
 	{
 		String ret = "";
@@ -83,13 +84,13 @@ public class BlockGrid
 		{
 			if(j != 0)
 				ret+="\n";
-			for(int i = 0; i < blocks.length; i++)
-			{
-				if(blocks[i][j] != null)
-					ret+="#";
-				else
-					ret+="-";
-			}
+                    for (Color[] block : blocks) {
+                        if (block[j] != null) {
+                            ret+="#";
+                        } else {
+                            ret+="-";
+                        }
+                    }
 		}
 		return ret;
 	}

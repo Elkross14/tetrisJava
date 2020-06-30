@@ -18,6 +18,7 @@ public class TetrisGrid extends BlockGrid
 			setWorkingBlock(TetrisBlock.getRandomBlock().setLocation(getWidth()/2, 0));
 	}
 
+        @Override
 	public void draw(Graphics g)
 	{
 		clear();
@@ -41,6 +42,7 @@ public class TetrisGrid extends BlockGrid
 
 	/**
 	* Sets the current working block.
+        * @param block 
 	* @return True if the block is set, false if the block will not fit.
 	*/
 	public boolean setWorkingBlock(TetrisBlock block)
@@ -191,16 +193,30 @@ public class TetrisGrid extends BlockGrid
 			grid.draw(null);
 			System.out.println(grid);
 			String line = s.nextLine();
-			if(line.equals(""))
-				grid.moveDown();
-			else if(line.equals("<"))
-				grid.moveLeft();
-			else if(line.equals(">"))
-				grid.moveRight();
-			else if(line.equals("("))
-				grid.turnLeft();
-			else if(line.equals(")"))
-				grid.turnRight();
+                    switch (line) {
+                        case "":
+                            grid.moveDown();
+                            break;
+                            
+                        case "<":
+                            grid.moveLeft();
+                            break;
+                            
+                        case ">":
+                            grid.moveRight();
+                            break;
+                            
+                        case "(":
+                            grid.turnLeft();
+                            break;
+                            
+                        case ")":
+                            grid.turnRight();
+                            break;
+                            
+                        default:
+                            break;
+                    }
 		}
 	}
 }
