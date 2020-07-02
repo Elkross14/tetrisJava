@@ -39,13 +39,23 @@ public class BlockGrid {
     }
 
     
-    public int getWidth() {
+    /**
+     * Nos devuleve la cantidad de cuadros de la tabla a lo ancho
+     * 
+     * @return Cantidad de cuadros de la tabla a lo ancho
+     */
+    public int getWidthTable() {
 
         return blocks.length;
     }
 
     
-    public int getHeight() {
+    /**
+     * Nos devuleve la cantidad de cuadros de la tabla a lo alto
+     * 
+     * @return Cantidad de cuadros de la tabla a lo alto
+     */
+    public int getHeightTable() {
 
         return blocks[0].length;
     }
@@ -58,7 +68,7 @@ public class BlockGrid {
      */
     public int getGraphicsWidth() {
 
-        return getWidth()*BLOCK_SIDE;
+        return getWidthTable()*BLOCK_SIDE;
     }
 
     /**
@@ -68,7 +78,7 @@ public class BlockGrid {
      */
     public int getGraphicsHeight() {
 
-        return getHeight()*BLOCK_SIDE;
+        return getHeightTable()*BLOCK_SIDE;
     }
 
     public void clear() {

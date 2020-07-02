@@ -30,6 +30,7 @@ public class TetrisBlock{
     private int x, y;
 
     
+    
     private TetrisBlock(boolean[][] blocks, Color color){
         
         this.blocks = blocks;
@@ -37,6 +38,14 @@ public class TetrisBlock{
     }
 
     
+    /**
+     * Constructor de clase. Guarda en un objeto el tipo de figura, color y posición de este.
+     * 
+     * @param blocks Tipo de figura
+     * @param color Color de la figura
+     * @param x Posición en altura del bloque de abajo a la izquierda de la figura
+     * @param y Posición en anchura del bloque de abajo a la izquierda de la figura
+     */
     private TetrisBlock(boolean[][] blocks, Color color, int x, int y){
         
         this(blocks, color);
@@ -45,6 +54,11 @@ public class TetrisBlock{
     }
 
     
+    /**
+     * Genera una pieza aleatoria entre todas las que tentemos
+     * 
+     * @return Devuelve el nombre de la pieza a mostrar
+     */
     public static TetrisBlock getRandomBlock(){
         
         switch((int)(Math.random()*5)){
@@ -71,18 +85,36 @@ public class TetrisBlock{
     }
 
     
-    public int getWidth(){
+    /**
+     * Devuelve el ancho de la figura en movimiento
+     * 
+     * @return Anchura en bloques de la figura en movimiento
+     */
+    public int getWidthBlock(){
             
         return blocks.length;
     }
-
     
-    public int getHeight(){
+
+    /**
+     * Devuelve el alto de la figura en movimiento
+     * 
+     * @return Altura en bloques de la figura en movimiento
+     */
+    public int getHeightBlock(){
         
         return blocks[0].length;
     }
 
     
+    /**
+     * Nos devuelve la posición que tiene la fiugura en el tablero. Se toma
+     * como referencia el bloque de abajo a la izquierda del tablero.
+     * 
+     * @param x Posición de anchura de la tabla empezando desde la izquierda.
+     * @param y Posición de altura en la tabla empezando desde arriba.
+     * @return La posición del bloque de más abajo y a la izquierda de la figura.
+     */
     public TetrisBlock setLocation(int x, int y){
             
         return new TetrisBlock(blocks, color, x, y);

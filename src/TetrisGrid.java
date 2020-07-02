@@ -19,11 +19,11 @@ public class TetrisGrid extends BlockGrid{
     }
 
 
-    public void update(){
+    public void updateTetrisGrid(){
 
         if(workingBlock == null){
 
-            setWorkingBlock(TetrisBlock.getRandomBlock().setLocation(getWidth()/2, 0));
+            setWorkingBlock(TetrisBlock.getRandomBlock().setLocation(getWidthTable()/2, 0));
         }
     }
 
@@ -58,9 +58,10 @@ public class TetrisGrid extends BlockGrid{
 
 
     /**
-    * Sets the current working block.
-    * @param block 
-    * @return True if the block is set, false if the block will not fit.
+    * Cambia la posición del bloque
+    * 
+    * @param block Objeto de tipo TetrisBlock con los datos de tipo de figura, color y posición
+    * @return True si el bloque se ha modificado y False en caso contrario.
     */
     public boolean setWorkingBlock(TetrisBlock block){
 
@@ -89,12 +90,12 @@ public class TetrisGrid extends BlockGrid{
 
     private boolean canFit(TetrisBlock block){
 
-        if((block.getX() < 0) || (block.getX()+block.getWidth() > getWidth())){
+        if((block.getX() < 0) || (block.getX()+block.getWidthBlock() > getWidthTable())){
 
             return false;
         }
 
-        if(block.getY() >= getHeight()){
+        if(block.getY() >= getHeightTable()){
 
             return false;
         }
@@ -219,7 +220,7 @@ public class TetrisGrid extends BlockGrid{
                 blocksInRow++;
             }
         }
-        return blocksInRow == getWidth();
+        return blocksInRow == getWidthTable();
     }
 
 
@@ -243,7 +244,7 @@ public class TetrisGrid extends BlockGrid{
 
     public void rowCheck(){
 
-        for(int row = 1; row < getHeight(); row++){
+        for(int row = 1; row < getHeightTable(); row++){
 
             if(isRowFilled(row)){
 
@@ -260,7 +261,7 @@ public class TetrisGrid extends BlockGrid{
 
         while(true){
 
-            grid.update();
+            grid.updateTetrisGrid();
             grid.draw(null);
             System.out.println(grid);
             String line = s.nextLine();

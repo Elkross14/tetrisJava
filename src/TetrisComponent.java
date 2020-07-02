@@ -4,12 +4,10 @@ import java.awt.event.*;
 
 public class TetrisComponent extends JComponent implements KeyListener, Runnable{
     
-    public static final int DROP_DELAY_DECRESE_SPEED = 500;
-    public static final int MIN_DROP_DELAY = 3;
+    private final int CICLOS_PARA_DROP = 25;//ciclos necesarios antes de bajar una casilla
+    
     private TetrisGrid grid;
-    private int dropDelay = 25;
-    private int delay = 0;
-    private int delayDelay = 0;
+    private int contadorDelay = 0; //cuenta la cantidad de ciclos que ha hecho desdes del drop
 
     
     /**
@@ -31,7 +29,7 @@ public class TetrisComponent extends JComponent implements KeyListener, Runnable
     }
 
     
-    @Override
+    //@Override
     public void run(){
         
         while(true){
@@ -61,25 +59,20 @@ public class TetrisComponent extends JComponent implements KeyListener, Runnable
     }
 
     
+    /**
+     * Refresca la pantalla y desciende la pieza un bloque cuando contadorDelay == ciclosParaDrop.
+     */
     public void update(){
-        
-        delayDelay = (delayDelay+1)%DROP_DELAY_DECRESE_SPEED;
-        if(delayDelay == 0){
-            
-            dropDelay--;
-            
-            if(dropDelay < MIN_DROP_DELAY){
 
-                dropDelay = MIN_DROP_DELAY;
-            }
-        }
-        delay = (delay+1)%dropDelay;
+        contadorDelay++;
         
-        if(delay == 0){
+        if(contadorDelay == CICLOS_PARA_DROP){
             
             grid.moveDown();
+            
+            contadorDelay = 0;
         }
-        grid.update();
+        grid.updateTetrisGrid();
     }
 
     
