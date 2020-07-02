@@ -2,87 +2,129 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class TetrisComponent extends JComponent implements KeyListener, Runnable
-{
-	public static final int DROP_DELAY_DECRESE_SPEED = 500;
-	public static final int MIN_DROP_DELAY = 3;
-	private TetrisGrid grid;
-	private int dropDelay = 25;
-	private int delay = 0;
-	private int delayDelay = 0;
+public class TetrisComponent extends JComponent implements KeyListener, Runnable{
+    
+    public static final int DROP_DELAY_DECRESE_SPEED = 500;
+    public static final int MIN_DROP_DELAY = 3;
+    private TetrisGrid grid;
+    private int dropDelay = 25;
+    private int delay = 0;
+    private int delayDelay = 0;
 
-	public TetrisComponent(int width, int height)
-	{
-		super();
-		grid = new TetrisGrid(width, height);
- 		setPreferredSize(new Dimension(grid.getGraphicsWidth(), grid.getGraphicsHeight()));
+    
+    public TetrisComponent(int width, int height){
 
- 		addKeyListener(this);
- 		Thread run = new Thread(this);
- 		run.start();
-	}
+            super();
+            grid = new TetrisGrid(width, height);
+            setPreferredSize(new Dimension(grid.getGraphicsWidth(), grid.getGraphicsHeight()));
 
-	public void run()
-	{
-		while(true)
-		{
-			try
-			{
-				Thread.sleep(20);
-			}
-			catch(Exception ex)
-			{
-			}
-			requestFocus();
-			update();
-			repaint();
-		}
-	}
+            addKeyListener(this);
+            Thread run = new Thread(this);
+            run.start();
+    }
 
-	public void paint(Graphics g)
-	{
-		synchronized(g)
-		{
-			grid.draw(g);
-		}
-	}
+    
+    @Override
+    public void run(){
+        
+        while(true){
 
-	public void update()
-	{
-		delayDelay = (delayDelay+1)%DROP_DELAY_DECRESE_SPEED;
-		if(delayDelay == 0)
-		{
-			dropDelay--;
-			if(dropDelay < MIN_DROP_DELAY)
-				dropDelay = MIN_DROP_DELAY;
-		}
-		delay = (delay+1)%dropDelay;
-		if(delay == 0)
-			grid.moveDown();
-		grid.update();
-	}
+            try{
 
-	public void keyPressed(KeyEvent ke)
-	{
-		if(ke.getKeyCode() == KeyEvent.VK_LEFT)
-			grid.moveLeft();
-		else if(ke.getKeyCode() == KeyEvent.VK_RIGHT)
-			grid.moveRight();
-		else if(ke.getKeyCode() == KeyEvent.VK_DOWN)
-			grid.moveDown();
-		else if(ke.getKeyCode() == KeyEvent.VK_UP)
-			grid.turnRight();
-		else if(ke.getKeyCode() == KeyEvent.VK_COMMA)
-			grid.turnLeft();
-		else if(ke.getKeyCode() == KeyEvent.VK_PERIOD)
-			grid.turnRight();
-	}
+                Thread.sleep(20);//pausa la ejecucion del programa 20 milisegundos
+            }
+            catch(Exception ex){
+                //Lo dejamos vacio para evitar que nos salten mensajes de error innecesarios
+            }
+            requestFocus();
+            update();
+            repaint();
+        }
+    }
 
-	public void keyReleased(KeyEvent ke)
-	{
-	}
+    
+    @Override
+    public void paint(Graphics g){
+        
+        synchronized(g){
 
-	public void keyTyped(KeyEvent ke)
-	{
-	}
+            grid.draw(g);
+        }
+    }
+
+    
+    public void update(){
+        
+        delayDelay = (delayDelay+1)%DROP_DELAY_DECRESE_SPEED;
+        if(delayDelay == 0){
+            
+            dropDelay--;
+            
+            if(dropDelay < MIN_DROP_DELAY){
+
+                dropDelay = MIN_DROP_DELAY;
+            }
+        }
+        delay = (delay+1)%dropDelay;
+        
+        if(delay == 0){
+            
+            grid.moveDown();
+        }
+        grid.update();
+    }
+
+    
+    @Override
+    public void keyPressed(KeyEvent ke){
+        
+        switch (ke.getKeyCode()) {
+            
+            case KeyEvent.VK_LEFT:
+                
+                grid.moveLeft();
+                break;
+                
+            case KeyEvent.VK_RIGHT:
+                
+                grid.moveRight();
+                break;
+                
+            case KeyEvent.VK_DOWN:
+                
+                grid.moveDown();
+                break;
+                
+            case KeyEvent.VK_UP:
+                
+                grid.turnRight();
+                break;
+                
+            case KeyEvent.VK_COMMA:
+                
+                grid.turnLeft();
+                break;
+                
+            case KeyEvent.VK_PERIOD:
+                
+                grid.turnRight();
+                break;
+                
+            default:
+                
+                break;
+        }
+    }
+
+    
+    @Override
+    public void keyReleased(KeyEvent ke){
+        
+    }
+
+    
+    @Override
+    public void keyTyped(KeyEvent ke){
+        
+    }
 }
