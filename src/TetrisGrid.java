@@ -5,9 +5,14 @@ public class TetrisGrid extends BlockGrid{
     
     private Vector<TetrisBlock> lockedBlocks = new Vector();
     private TetrisBlock workingBlock;
-    private int points = 0;
+    private int points = 0; //puntos obtenidos por el jugador
 
-
+    /**
+    * Contructor de clase. Hereda de BlockGrid
+    *
+    * @param width Cantidad de cuadros a lo ancho que tendrá la tabla del juego
+    * @param height Cantidad de cuadros a lo alto que tendrá la tabla del juego
+    */
     public TetrisGrid(int width, int height){
 
             super(width, height);

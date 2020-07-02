@@ -8,11 +8,13 @@ public class BlockGrid {
     private Color[][] blocks;
     private Color currentColor = BACKGROUND_COLOR;
 
+    
     public BlockGrid(int width, int height){
 
         blocks = new Color[width][height];
     }
 
+    
     public void drawSquare(int x, int y) {
 
         try {
@@ -24,31 +26,46 @@ public class BlockGrid {
         }
     }
 
+    
     public void drawSquare(Point p) {
 
         drawSquare(p.x, p.y);
     }
 
+    
     public void setColor(Color color) {
 
         currentColor = color;
     }
 
+    
     public int getWidth() {
 
         return blocks.length;
     }
 
+    
     public int getHeight() {
 
         return blocks[0].length;
     }
 
+    
+    /**
+     * Multiplica la cantidad de cuadros a lo ancho con el tamaño en pixeles de un cuadro
+     * 
+     * @return Ancho total de la tabla en píxeles
+     */
     public int getGraphicsWidth() {
 
         return getWidth()*BLOCK_SIDE;
     }
 
+    /**
+     * Multiplica la cantidad de cuadros a lo alto con el tamaño en pixeles de un cuadro
+     * 
+     * @return Alto total de la tabla en píxeles
+     */
     public int getGraphicsHeight() {
 
         return getHeight()*BLOCK_SIDE;

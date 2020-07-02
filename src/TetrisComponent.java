@@ -12,9 +12,16 @@ public class TetrisComponent extends JComponent implements KeyListener, Runnable
     private int delayDelay = 0;
 
     
+    /**
+    * Contructor de clase. Hereda de JComponent
+    *
+    * @param width Cantidad de cuadros a lo ancho que tendrá la tabla del juego
+    * @param height Cantidad de cuadros a lo alto que tendrá la tabla del juego
+    */
     public TetrisComponent(int width, int height){
 
             super();
+            
             grid = new TetrisGrid(width, height);
             setPreferredSize(new Dimension(grid.getGraphicsWidth(), grid.getGraphicsHeight()));
 
@@ -36,6 +43,7 @@ public class TetrisComponent extends JComponent implements KeyListener, Runnable
             catch(Exception ex){
                 //Lo dejamos vacio para evitar que nos salten mensajes de error innecesarios
             }
+            
             requestFocus();
             update();
             repaint();
